@@ -1,13 +1,12 @@
 import VueRouter from "vue-router";
-// import Count from "../components/Count"
-// import Person from "../components/Person";
+import Login from "../views/Login";
 //创建并暴露一个路由器
 export default new VueRouter({
   routes: [
-    // {
-    //   path: '/count',
-    //   component: Count
-    // },
+    {
+      path: '/login',
+      component: Login
+    },
     // {
     //   path: '/person',
     //   component: Person
