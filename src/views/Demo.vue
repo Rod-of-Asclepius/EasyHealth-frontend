@@ -1,5 +1,12 @@
 <template>
-  <div>
+    <div class="main" :style="{
+       backgroundImage:imgUrl ,
+       backgroundRepeat:'no-repeat',
+       backgroundSize: '100% 100%',
+       height: '100%',
+       width: '100%',
+       position:'fixed',
+    }">
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="活动名称">
         <el-input v-model="form.name"></el-input>
@@ -52,6 +59,7 @@
     name: "Demo",
     data() {
       return {
+        imgUrl:'url(' + require('../assets/img/bg.jpg') + ')',
         form: {
           name: '',
           region: '',
@@ -73,5 +81,7 @@
 </script>
 
 <style scoped>
-
+ .main img{
+   object-fit: cover;
+ }
 </style>

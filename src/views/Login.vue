@@ -1,5 +1,15 @@
 <template>
-  <div>
+  <div :style="{
+     backgroundImage:imgUrl ,
+     backgroundSize:'cover',
+     backgroundRepeat:'no-repeat',
+     backgroundPosition:'center center',
+     // backgroundSize: '100% 100%',
+     position:'fixed',
+     width: '100%',
+     height: '100%',
+     objectFit: 'cover'
+  }">
     <el-form ref="loginForm" :model="form" :rules="rules" label-width="80px" class="login-box">
       <h3 class="login-title">欢迎登录</h3>
       <el-form-item label="账号" prop="username">
@@ -37,7 +47,7 @@
     name:"Login",
     data(){
       return {
-        imgUrl:'url(' + require('../assets/img/2.jpg') + ')',
+        imgUrl:'url(' + require('../assets/img/bg.jpg') + ')',
         form:{
           username: '',
           password: '',
@@ -88,9 +98,10 @@
 <style scoped>
   .login-box{
     background-color: white;
+    opacity: 0.85 ;
     border: 1px solid #DCDFE6;
     width: 350px;
-    margin:120px auto;
+    margin:120px 660px;
     padding:25px 35px 25px 35px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
