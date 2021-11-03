@@ -1,5 +1,5 @@
 <template>
-    <div class="main" :style="{
+    <div :style="{
        backgroundImage:imgUrl ,
        backgroundRepeat:'no-repeat',
        backgroundSize: '100% 100%',
@@ -81,7 +81,5 @@
 </script>
 
 <style scoped>
- .main img{
-   object-fit: cover;
- }
+
 </style>

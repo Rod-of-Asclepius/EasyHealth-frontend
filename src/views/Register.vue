@@ -1,12 +1,14 @@
 <template>
-  <div class="main" :style="{
-       backgroundImage:imgUrl ,
-       backgroundRepeat:'no-repeat',
-       backgroundSize: '100% 100%',
-       height: '100%',
-       width: '100%',
-       position:'fixed',
-    }">
+  <div :style="{
+     backgroundImage:imgUrl ,
+     backgroundSize:'cover',
+     backgroundRepeat:'no-repeat',
+     backgroundPosition:'center center',
+     position:'fixed',
+     width: '100%',
+     height: '100%',
+     objectFit: 'cover'
+  }">
     <el-form ref="registerForm" :model="form" :rules="rules" label-width="80px" class="login-box">
       <h3 class="login-title">欢迎注册</h3>
       <el-form-item label="账号" prop="username">
