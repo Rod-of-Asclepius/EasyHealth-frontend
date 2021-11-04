@@ -2,6 +2,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login";
 import Register from "../views/Register";
 import Demo from '../views/Demo'
+import UserHome from '../views/user/UserHome'
 //创建并暴露一个路由器
 export default new VueRouter({
   routes: [
@@ -16,10 +17,10 @@ export default new VueRouter({
     {
       path: '/register',
       component: Register
+    },
+    {
+      path: '/user/index',
+      component: UserHome
     }
-    // {
-    //   path: '/person',
-    //   component: Person
-    // }
   ]
 })
