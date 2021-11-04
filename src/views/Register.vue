@@ -22,7 +22,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" v-on:click="onSubmit('registerForm')">立即注册</el-button>
-        <el-button>取消</el-button>
+        <el-button @click="goLogin">取消</el-button>
       </el-form-item>
     </el-form>
 
@@ -110,6 +110,9 @@
             return false;
           }
         });
+      },
+      goLogin(){
+        this.$router.push("/login");
       }
     }
   }
