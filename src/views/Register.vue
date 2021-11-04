@@ -30,7 +30,7 @@
             title="温馨提示"
             :visible.sync="dialogVisible"
             width="30%"
-            >
+            :before-close="handleClose" append-to-body>
       <span>请输入账号和密码</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -40,7 +40,8 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  // import axios from 'axios'
+  import {checkRegister} from "../network/login";
   export  default {
     name:"Register",
     data(){
@@ -82,41 +83,33 @@
       onSubmit(formName) {
         //为表单绑定验证功能
         this.$refs[formName].validate((valid) =>{
-          if (!valid){
+          if (valid){
+            //注册检查
+            checkRegister(this.form)
+                .then(res => {
+                  console.log(res.data)
+                  /*弹出侧边通知*/
+                  this.$notify({
+                    title: '注册成功',
+                    message: '请登录~',
+                    type: 'success'
+                  });
+                  //使用 vue-router路由到指定页面，该方式称之为编程式导航
+                  this.$router.push("/login");
+                })
+                .catch(err => {
+                  console.log(err)
+                  this.$notify({
+                    title: '注册失败',
+                    message: '该用户名已存在！',
+                    type: 'error'
+                  });
+                })
+          } else {
             this.dialogVisible = true;
             return false;
           }
-          // else {
-          //   this.dialogVisible = true;
-          //   return false;
-          // }
         });
-
-        axios
-            .post('http://api.roa.voiddog.cn/register',
-                this.$qs.stringify({
-                  username: this.form.username,
-                  password: this.form.password
-                }))
-            .then(res => {
-              console.log(res.data)
-              /*弹出侧边通知*/
-              this.$notify({
-                title: '注册成功',
-                message: '请登录~',
-                type: 'success'
-              });
-              //使用 vue-router路由到指定页面，该方式称之为编程式导航
-              this.$router.push("/login");
-            })
-            .catch(err => {
-              console.log(err)
-              this.$notify({
-                title: '注册失败',
-                message: '该用户名已存在！',
-                type: 'error'
-              });
-            })
       }
     }
   }

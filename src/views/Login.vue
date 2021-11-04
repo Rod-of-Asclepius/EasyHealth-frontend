@@ -33,7 +33,8 @@
     <el-dialog
         title="温馨提示"
         :visible.sync="dialogVisible"
-        width="30%">
+        width="30%"
+        :before-close="handleClose">
       <span>请输入账号和密码</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -43,7 +44,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  // import axios from 'axios'
   import {checkLogin} from '../network/login'
   export  default {
     name:"Login",
@@ -77,31 +78,26 @@
         console.log(checkLogin(this.form));
         this.$refs[formName].validate((valid) =>{
           if (valid){
+            //账号密码核对
+            checkLogin(this.form).then(res => {
+              console.log(res.data)
               //弹出侧边通知窗
-              axios
-                .post('http://api.roa.voiddog.cn/login',
-                    this.$qs.stringify({
-                      username: this.form.username,
-                      password: this.form.password
-                    }))
-                .then(res => {
-                  console.log(res.data)
-                    this.$notify({
-                      title: '登录成功',
-                      message: '欢迎回来~',
-                      type: 'success'
-                    });
-                    //使用 vue-router路由到指定页面，该方式称之为编程式导航
-                    this.$router.push("/user/index");
-                })
-                .catch(err => {
-                  console.log(err)
-                  this.$notify({
-                    title: '登录失败',
-                    message: '请核对账号密码~',
-                    type: 'error'
-                  });
-                })
+              this.$notify({
+                title: '登录成功',
+                message: '欢迎回来~',
+                type: 'success'
+              });
+              //使用 vue-router路由到指定页面，该方式称之为编程式导航
+              this.$router.push("/user/index");
+            })
+            .catch(err => {
+              console.log(err)
+              this.$notify({
+                title: '登录失败',
+                message: '请核对账号密码~',
+                type: 'error'
+              });
+            })
           } else {
             this.dialogVisible = true;
             return false;
