@@ -1,14 +1,5 @@
 <template>
-  <div :style="{
-     backgroundImage:imgUrl ,
-     backgroundSize:'cover',
-     backgroundRepeat:'no-repeat',
-     backgroundPosition:'center center',
-     position:'fixed',
-     width: '100%',
-     height: '100%',
-     objectFit: 'cover'
-  }">
+  <div>
     <el-form ref="registerForm" :model="form" :rules="rules" label-width="80px" class="login-box">
       <h3 class="login-title">欢迎注册</h3>
       <el-form-item label="账号" prop="username">
@@ -22,7 +13,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" v-on:click="onSubmit('registerForm')">立即注册</el-button>
-        <el-button @click="goLogin">取消</el-button>
+        <el-button>取消</el-button>
       </el-form-item>
     </el-form>
 
@@ -30,7 +21,7 @@
             title="温馨提示"
             :visible.sync="dialogVisible"
             width="30%"
-            :before-close="handleClose" append-to-body>
+            >
       <span>请输入账号和密码</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -40,8 +31,6 @@
 </template>
 
 <script>
-  // import axios from 'axios'
-  import {checkRegister} from "../network/login";
   export  default {
     name:"Register",
     data(){
@@ -55,7 +44,6 @@
         }
       };
       return {
-        imgUrl:'url(' + require('../assets/img/bg.jpg') + ')',
         form:{
           username: '',
           password: '',
@@ -84,35 +72,19 @@
         //为表单绑定验证功能
         this.$refs[formName].validate((valid) =>{
           if (valid){
-            //注册检查
-            checkRegister(this.form)
-                .then(res => {
-                  console.log(res.data)
-                  /*弹出侧边通知*/
-                  this.$notify({
-                    title: '注册成功',
-                    message: '请登录~',
-                    type: 'success'
-                  });
-                  //使用 vue-router路由到指定页面，该方式称之为编程式导航
-                  this.$router.push("/login");
-                })
-                .catch(err => {
-                  console.log(err)
-                  this.$notify({
-                    title: '注册失败',
-                    message: '该用户名已存在！',
-                    type: 'error'
-                  });
-                })
+            /*弹出侧边通知*/
+            this.$notify({
+              title: '注册成功',
+              message: '请登录~',
+              type: 'success'
+            });
+            //使用 vue-router路由到指定页面，该方式称之为编程式导航
+            this.$router.push("/login");
           } else {
             this.dialogVisible = true;
             return false;
           }
         });
-      },
-      goLogin(){
-        this.$router.push("/login");
       }
     }
   }
@@ -120,11 +92,9 @@
 
 <style scoped>
   .login-box{
-    background-color: white;
-    opacity: 0.85 ;
     border: 1px solid #DCDFE6;
     width: 350px;
-    margin:120px 660px;
+    margin:120px auto;
     padding:30px 35px 15px 35px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
