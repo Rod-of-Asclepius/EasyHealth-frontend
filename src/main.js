@@ -3,10 +3,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-
+import axios from "axios";
 import store from './store'
 import router from './router'
-import qs from 'qs'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -18,6 +17,18 @@ new Vue({
   router,
   beforeCreate() {
     Vue.prototype.$bus = this //安装全局事件总线
-    Vue.prototype.$qs = qs;
   }
 }).$mount('#app')
+axios({
+  url:'http://api.roa.voiddog.cn/login?username=test&&password=test',
+  method:'post'
+}).then(res =>{
+  console.log(res);
+})
+
+// axios.all([axios({
+//   baseURL:'http://api.roa.voiddog.cn',
+//   url:'/login?username=test&&password=test'
+// }),axios({
+//
+// })])
