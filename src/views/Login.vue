@@ -4,7 +4,6 @@
      backgroundSize:'cover',
      backgroundRepeat:'no-repeat',
      backgroundPosition:'center center',
-     // backgroundSize: '100% 100%',
      position:'fixed',
      width: '100%',
      height: '100%',
@@ -34,7 +33,7 @@
         title="温馨提示"
         :visible.sync="dialogVisible"
         width="30%"
-        :before-close="handleClose">
+        :before-close="handleClose" append-to-body>
       <span>请输入账号和密码</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>

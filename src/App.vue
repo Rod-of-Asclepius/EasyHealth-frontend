@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 100%">
     <router-view>
 
     </router-view>
@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
   components: {
