@@ -27,10 +27,10 @@
     </el-form>
 
     <el-dialog
-            title="温馨提示"
-            :visible.sync="dialogVisible"
-            width="30%"
-            :before-close="handleClose" append-to-body>
+        title="温馨提示"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose" append-to-body>
       <span>请输入账号和密码</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -40,102 +40,102 @@
 </template>
 
 <script>
-  // import axios from 'axios'
-  import {checkRegister} from "../network/login";
-  export  default {
-    name:"Register",
-    data(){
-      var repasswordValidator = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.form.password) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        imgUrl:'url(' + require('../assets/img/bg.jpg') + ')',
-        form:{
-          username: '',
-          password: '',
-          repassword: ''
-        },
-
-        //表单验证，需要再el-form-item 元素中增加prop属性
-        rules:{
-          username: [
-            {required:true,message:'账号不能为空',trigger:'blur'}
-          ],
-          password: [
-            {required: true,message: '密码不能为空',trigger:'blur'}
-          ],
-          repassword: [
-            {required: true,message: '请再次输入密码',trigger:'blur'},
-            {validator: repasswordValidator,trigger: ['blur','change']},
-          ]
-        },
-        //对话框显示和隐藏
-        dialogVisible:false
+// import axios from 'axios'
+import {checkRegister} from "../network/login";
+export  default {
+  name:"Register",
+  data(){
+    var repasswordValidator = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.form.password) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
       }
-    },
-    methods:{
-      onSubmit(formName) {
-        //为表单绑定验证功能
-        this.$refs[formName].validate((valid) =>{
-          if (valid){
-            //注册检查
-            checkRegister(this.form)
-                .then(res => {
-                  console.log(res.data)
-                  /*弹出侧边通知*/
-                  this.$notify({
-                    title: '注册成功',
-                    message: '请登录~',
-                    type: 'success'
-                  });
-                  //使用 vue-router路由到指定页面，该方式称之为编程式导航
-                  this.$router.push("/login");
-                })
-                .catch(err => {
-                  console.log(err)
-                  this.$notify({
-                    title: '注册失败',
-                    message: '该用户名已存在！',
-                    type: 'error'
-                  });
-                })
-          } else {
-            this.dialogVisible = true;
-            return false;
-          }
-        });
+    };
+    return {
+      imgUrl:'url(' + require('../assets/img/bg.jpg') + ')',
+      form:{
+        username: '',
+        password: '',
+        repassword: ''
       },
-      goLogin(){
-        this.$router.push("/login");
-      }
+
+      //表单验证，需要再el-form-item 元素中增加prop属性
+      rules:{
+        username: [
+          {required:true,message:'账号不能为空',trigger:'blur'}
+        ],
+        password: [
+          {required: true,message: '密码不能为空',trigger:'blur'}
+        ],
+        repassword: [
+          {required: true,message: '请再次输入密码',trigger:'blur'},
+          {validator: repasswordValidator,trigger: ['blur','change']},
+        ]
+      },
+      //对话框显示和隐藏
+      dialogVisible:false
+    }
+  },
+  methods:{
+    onSubmit(formName) {
+      //为表单绑定验证功能
+      this.$refs[formName].validate((valid) =>{
+        if (valid){
+          //注册检查
+          checkRegister(this.form)
+              .then(res => {
+                console.log(res.data)
+                /*弹出侧边通知*/
+                this.$notify({
+                  title: '注册成功',
+                  message: '请登录~',
+                  type: 'success'
+                });
+                //使用 vue-router路由到指定页面，该方式称之为编程式导航
+                this.$router.push("/login");
+              })
+              .catch(err => {
+                console.log(err)
+                this.$notify({
+                  title: '注册失败',
+                  message: '该用户名已存在！',
+                  type: 'error'
+                });
+              })
+        } else {
+          this.dialogVisible = true;
+          return false;
+        }
+      });
+    },
+    goLogin(){
+      this.$router.push("/login");
     }
   }
+}
 </script>
 
 <style scoped>
-  .login-box{
-    background-color: white;
-    opacity: 0.85 ;
-    border: 1px solid #DCDFE6;
-    width: 350px;
-    margin:120px 660px;
-    padding:30px 35px 15px 35px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    box-shadow:0 0 25px #909399;
-  }
+.login-box{
+  background-color: white;
+  opacity: 0.85 ;
+  border: 1px solid #DCDFE6;
+  width: 350px;
+  margin:120px 660px;
+  padding:30px 35px 15px 35px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow:0 0 25px #909399;
+}
 
-  .login-title{
-    text-align:center;
-    margin:0 auto 30px auto;
-    color:#303133;
-  }
+.login-title{
+  text-align:center;
+  margin:0 auto 30px auto;
+  color:#303133;
+}
 </style>
 
