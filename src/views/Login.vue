@@ -70,6 +70,7 @@
         //对话框显示和隐藏
         dialogVisible:false
       }
+
     },
     methods:{
       onSubmit(formName) {
