@@ -27,8 +27,12 @@ export default new VueRouter({
       component: UserHome
     },
     {
-      path: '/',
+      path: '/user/index',
       component: AdminHome
+    },
+    {
+      path: '/',
+      component: Login
     },
     {
       path:'/main',
