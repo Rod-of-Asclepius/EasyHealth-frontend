@@ -4,6 +4,9 @@ import Register from "../views/Register";
 import Demo from '../views/Demo'
 import UserHome from '../views/user/UserHome'
 import AdminHome from '../views/admin/AdminHome'
+
+import Main from "@/views/Main";
+import Hospital from "@/views/Hospital";
 //创建并暴露一个路由器
 export default new VueRouter({
   routes: [
@@ -26,6 +29,14 @@ export default new VueRouter({
     {
       path: '/',
       component: AdminHome
+    },
+    {
+      path:'/main',
+      component:Main
+    },
+    {
+      path:'/hospital',
+      component:Hospital
     }
   ]
 })
