@@ -7,6 +7,7 @@ import AdminHome from '../views/admin/AdminHome'
 
 import Main from "@/views/Main";
 import Hospital from "@/views/Hospital";
+import Outpatient from "@/views/Outpatient";
 //创建并暴露一个路由器
 export default new VueRouter({
   routes: [
@@ -41,6 +42,10 @@ export default new VueRouter({
     {
       path:'/hospital',
       component:Hospital
+    },
+    {
+      path:'/outpatient',
+      component:Outpatient
     }
   ]
 })

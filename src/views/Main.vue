@@ -1,8 +1,7 @@
 <template>
   <div>
     <navigation></navigation>
-
-    <el-container>
+    <el-container style="padding-top: 80px">
       <el-aside width="200px"> </el-aside>
       <el-container>
         <el-main>

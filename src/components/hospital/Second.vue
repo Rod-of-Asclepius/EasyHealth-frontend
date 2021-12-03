@@ -2,23 +2,26 @@
   <div class="home">
     <el-container>
       <el-header></el-header>
-      <el-container >
-        <el-aside style="color: #f4f9ff;height: 440px;width:187px">
+      <el-container>
+        <HospitalAside></HospitalAside>
+        <el-aside style="color: #f4f9ff;height: 440px;width:187px;margin-left: 307px">
           <a>选择科室</a>
           <div v-for="(value,name) in detail" :key="value">
             <div :class="{'bg_color':current_name==name}" @click="cg_current_name(name)">
-              <a style="color: #333333"  :href="'#'+name" >{{ name }}</a>
+              <a style="color: #333333" @click="selectId(name)">{{ name }}</a>
             </div>
           </div>
         </el-aside>
         <el-container>
           <el-main>
-            <div class="sub-item-wrapper" v-for="(value,name) in detail" :key="(value,name)" :id="name" :class="{'bg_color2':current_name==name}">
-              <div class="sub-title" >{{ name }}</div>
-              <div class="sub-item-wrapper">
+            <div class="sub-item-wrapper" v-for="(value,name) in detail" :key="(value,name)"
+                 :class="{'bg_color2':current_name==name}">
+              <div class="dark-anchor" :id="name" style="height: 100px;margin-top: -100px"></div>
+              <div class="sub-title"  >{{ name }}</div>
+              <div class="sub-item-wrapper" >
                 <div class="sub-item-wrapper" v-for="tmp in value" :key="tmp">
                   <div class="sub-item">
-                    <a style="color: #333333">{{ tmp }}</a>
+                    <a style="color: #333333" :href="'#/Hospital/'+tmp">{{ tmp }}</a>
                   </div>
                 </div>
               </div>
@@ -33,8 +36,10 @@
 </template>
 <script>
 import 'ant-design-vue/dist/antd.css'
+import HospitalAside from "@/components/hospital/HospitalAside";
 
 export default {
+  components: {HospitalAside},
   data() {
     return {
       active: "style=\"background-color: #f4f9ff;\"",
@@ -65,27 +70,32 @@ export default {
               '戒烟门诊', '综合内科', '医务室', '免疫学', '病理科', '激光科'],
 
           },
-      current_name:-1,
+      current_name: -1,
     }
   },
   methods: {
     onChange(link) {
       console.log('Anchor:OnChange', link);
     },
-    cg_current_name(name){
+    cg_current_name(name) {
       this.current_name = name;
+    },
+    selectId(name){
+      document.getElementById(name).scrollIntoView();
     }
   }
 };
 </script>
 <style scoped>
-.bg_color2{
+.bg_color2 {
   background-color: #fafafa;
 }
-.bg_color{
+
+.bg_color {
   background-color: #ffffff;
   font-weight: bold;
 }
+
 .el-header, .el-footer {
   background-color: #ffffff;
   color: #333;
@@ -98,7 +108,9 @@ export default {
   background-color: #f4f9ff;
   text-align: center;
   line-height: 40px;
-
+  overflow: hidden;
+  margin-top: 70px;
+  position: fixed;
 }
 
 .el-main {
@@ -107,6 +119,9 @@ export default {
   text-align: center;
   line-height: 19px;
   width: 400px;
+  display: block;
+  margin-left: 500px;
+  padding-top: 100px;
 }
 
 .sub-item {
@@ -152,4 +167,7 @@ export default {
   font-weight: 700;
   color: #333;
 }
+
+
+
 </style>

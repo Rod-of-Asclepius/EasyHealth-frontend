@@ -1,5 +1,5 @@
 <template>
-<div class="navigation">
+<div class="navigation"  style="position:fixed ;width: 1600px ;height: 80px;z-index: 9999;background:#ffffff;box-shadow: #666 0px 0px 10px">
   <el-row :gutter="20">
     <el-col :span="2"><div class="grid-content bg-white"></div></el-col>
     <el-col :span="10">
